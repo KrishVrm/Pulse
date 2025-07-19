@@ -4,6 +4,7 @@ import { auth } from "./firebase/firebaseConfig";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header user={user}/>
       {user ? <Dashboard user={user} /> : <Login />}
       {user ? <Sidebar user={user} /> : <Login />}
     </div>

@@ -20,6 +20,15 @@ export default function Feed({ sources }) {
 function RedditPosts({ subreddit }) {
   const { posts, loading } = useRedditFetch(subreddit);
 
+  // Helper to check if thumbnail is a valid image
+  const isValidThumbnail = (thumb) =>
+    thumb &&
+    thumb !== "self" &&
+    thumb !== "default" &&
+    thumb !== "nsfw" &&
+    thumb !== "image" &&
+    thumb.startsWith("http");
+
   return (
     <div className="reddit-section">
       <h4 className="reddit-title">r/{subreddit}</h4>
@@ -35,10 +44,22 @@ function RedditPosts({ subreddit }) {
                 rel="noreferrer"
                 className="reddit-link"
               >
-                <p className="reddit-post-title">{post.title}</p>
-                <p className="reddit-post-meta">
-                  👍 {post.ups} | 💬 {post.num_comments}
-                </p>
+                <div className="reddit-post-content">
+                  {post.preview?.images?.[0]?.source?.url && (
+  <img
+    src={post.preview.images[0].source.url.replace(/&amp;/g, "&")}
+    alt="post"
+    className="reddit-post-thumb"
+  />
+)}
+
+                  <div>
+                    <p className="reddit-post-title">{post.title}</p>
+                    <p className="reddit-post-meta">
+                      👍 {post.ups} | 💬 {post.num_comments}
+                    </p>
+                  </div>
+                </div>
               </a>
             </li>
           ))}

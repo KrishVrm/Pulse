@@ -1,5 +1,69 @@
+:root {
+  --primary-color: #FF6B6B;
+  --accent-color: #B86B4B;
+  --background-color: #FAF3E0;
+  --text-color: #4B3F36 ;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body {
-  background: #F6F6F7;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: "Be Vietnam", sans-serif;
+}
+
+body {
+  line-height: 1.3;
+}
+
+a,
+a:visited,
+a:hover {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+  list-style: none;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+* button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.noscroll {
+  overflow: hidden;
 }
 
 .auth-container {
@@ -94,9 +158,7 @@ body {
   max-width: 700px;
   margin: 2rem auto;
   padding: 2rem 1.5rem;
-  background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .dashboard-header {
@@ -109,7 +171,6 @@ body {
 .dashboard-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222;
   margin: 0;
 }
 
@@ -148,7 +209,7 @@ body {
 }
 .add-source .add-source-btn {
   padding: 0.5rem 1.25rem;
-  background: #2563eb;
+  background: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -169,7 +230,6 @@ body {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #222;
 }
 
 .feed-empty {
@@ -217,19 +277,31 @@ body {
 .reddit-list-item:hover {
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
 }
-
-.reddit-link {
+.reddit-list-item .reddit-link {
   text-decoration: none;
   color: inherit;
   display: block;
 }
-
-.reddit-post-title {
+.reddit-list-item .reddit-post-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.reddit-list-item .reddit-post-thumb {
+  width: 64px;
+  height: 64px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+.reddit-list-item .reddit-post-title {
   font-weight: 500;
   margin-bottom: 0.25rem;
 }
-
-.reddit-post-meta {
+.reddit-list-item .reddit-post-meta {
   font-size: 0.95rem;
   color: #6b7280;
 }
@@ -237,11 +309,11 @@ body {
 .sidebar {
   width: 220px;
   min-height: 100vh;
-  background: #ffffff;
   border-right: 1px solid #e5e7eb;
   padding: 2rem 1rem 1rem 1.5rem;
   position: fixed;
-  top: 0;
+  background: var(--secondary-background-color);
+  top: 61px;
   left: 0;
 }
 .sidebar .sidebar-title {
@@ -262,7 +334,6 @@ body {
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
   cursor: pointer;
-  color: #222;
   font-size: 1rem;
   transition: background 0.18s, color 0.18s;
 }
@@ -270,4 +341,147 @@ body {
   background: #2563eb;
   color: #fff;
   outline: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.header .header-logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 1px;
+}
+.header .header-search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.header .header-search .header-search-input {
+  width: 320px;
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #bbb;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+.header .header-search .header-search-input:focus {
+  border-color: #2563eb;
+  outline: none;
+  background: #fff;
+}
+.header .header-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 40px;
+}
+.header .header-avatar .header-avatar-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  display: flex;
+  align-items: center;
+  transition: box-shadow 0.15s;
+}
+.header .header-avatar .header-avatar-btn:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2666666667);
+}
+.header .header-avatar .header-avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 2px solid #2563eb;
+}
+.header .header-avatar .header-avatar-placeholder {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: 2px solid #2563eb;
+}
+.header .header-avatar .header-dropdown {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  min-width: 210px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.header .header-avatar .header-dropdown .header-dropdown-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.header .header-avatar .header-dropdown .header-dropdown-user .header-dropdown-img,
+.header .header-avatar .header-dropdown .header-dropdown-user .header-dropdown-placeholder {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: #2563eb;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.header .header-avatar .header-dropdown .header-dropdown-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+}
+.header .header-avatar .header-dropdown .header-dropdown-email {
+  font-size: 0.93rem;
+  color: #6b7280;
+  margin-top: 2px;
+}
+.header .header-avatar .header-dropdown .header-dropdown-logout {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.header .header-avatar .header-dropdown .header-dropdown-logout:hover {
+  background: #dc2626;
 }/*# sourceMappingURL=main.css.map */

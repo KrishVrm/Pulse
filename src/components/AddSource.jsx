@@ -20,13 +20,27 @@ async function saveSource(newSource) {
 
 export default function AddSource({ setSources }) {
   const [input, setInput] = useState("");
+  const [error, setError] = useState("");
 
   const handleAdd = async () => {
     const trimmed = input.trim();
-    if (trimmed !== "") {
-      setSources(prev => [...prev, trimmed]);
-      await saveSource(trimmed);
+    if (trimmed === "") return;
+
+    setError("");
+    setSources(prev => {
+      if (prev.includes(trimmed)) {
+        // setError("Source already added.");
+        return prev;
+      }
+      saveSource(trimmed);
       setInput("");
+      return [...prev, trimmed];
+    });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAdd();
     }
   };
 
@@ -37,11 +51,13 @@ export default function AddSource({ setSources }) {
         placeholder="Enter subreddit or @handle"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="add-source-input"
       />
       <button onClick={handleAdd} className="add-source-btn">
         Add Source
       </button>
+      {error && <div className="auth-error">{error}</div>}
     </div>
   );
 }
